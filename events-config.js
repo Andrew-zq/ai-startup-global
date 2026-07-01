@@ -14,3 +14,12 @@ window.EVENTS_CONFIG = {
     {id:"member-enterprise-sales",date:"2026-08-22T10:00:00-07:00",title:"Enterprise AI Sales Studio",titleZh:"企业级 AI 销售实战课",location:"Private Member Session",locationZh:"会员私享活动",type:"Member Studio",typeZh:"会员实战课",description:"Build a credible enterprise offer, pilot structure and stakeholder map with experienced operators.",descriptionZh:"与实战专家共同打磨企业方案、试点结构与关键决策人地图。"}
   ]
 };
+
+if (!window.supabaseClient) {
+  document.write('<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"><\/script>');
+  document.write('<script src="supabase-config.js"><\/script>');
+  document.write('<script src="supabase-client.js"><\/script>');
+  document.write('<script src="supabase-data.js"><\/script>');
+} else if (!window.AISGData) {
+  document.write('<script src="supabase-data.js"><\/script>');
+}
