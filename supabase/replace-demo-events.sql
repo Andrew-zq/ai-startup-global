@@ -1,3 +1,5 @@
+begin;
+
 delete from public.events;
 
 insert into public.events (
@@ -19,18 +21,6 @@ values (
   '2026-07-01T18:30:00-07:00',
   'https://luma.com/4ig5pzzb',
   true
-)
-on conflict (id) do update set
-  channel = excluded.channel,
-  title = excluded.title,
-  title_zh = excluded.title_zh,
-  description = excluded.description,
-  description_zh = excluded.description_zh,
-  event_type = excluded.event_type,
-  event_type_zh = excluded.event_type_zh,
-  location = excluded.location,
-  location_zh = excluded.location_zh,
-  starts_at = excluded.starts_at,
-  registration_url = excluded.registration_url,
-  published = excluded.published,
-  updated_at = now();
+);
+
+commit;
