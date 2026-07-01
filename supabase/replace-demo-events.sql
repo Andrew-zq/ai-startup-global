@@ -1,11 +1,13 @@
 begin;
 
+alter table public.events add column if not exists ends_at timestamptz;
+
 delete from public.events;
 
 insert into public.events (
   id, channel, title, title_zh, description, description_zh,
   event_type, event_type_zh, location, location_zh,
-  starts_at, registration_url, published
+  starts_at, ends_at, registration_url, published
 )
 values (
   'luma-4ig5pzzb',
@@ -19,6 +21,7 @@ values (
   'Vancouver, Canada',
   '加拿大温哥华',
   '2026-07-01T18:30:00-07:00',
+  '2026-07-01T20:00:00-07:00',
   'https://luma.com/4ig5pzzb',
   true
 );

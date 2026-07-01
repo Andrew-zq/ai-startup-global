@@ -26,6 +26,7 @@ create table public.events (
   location text,
   location_zh text,
   starts_at timestamptz not null,
+  ends_at timestamptz,
   registration_url text,
   summary text,
   summary_zh text,
