@@ -1,0 +1,7 @@
+.agents/
+knowledge-base-build/
+assets/brand/ai-startup-global-logo-chroma.png
+assets/brand/ai-startup-global-logo.png
+*.log
+.DS_Store
+Thumbs.db

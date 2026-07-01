@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Member Dashboard — AI Startup Global</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="portal-page">
+  <header class="portal-nav">
+    <a class="brand" href="index.html"><span class="mark">A<span>✦</span></span><b>AI Startup<br>Global</b></a>
+    <div><button class="lang-toggle" data-portal-lang>中文</button><a class="btn ghost compact" href="index.html">← Home</a></div>
+  </header>
+  <main class="portal-shell">
+    <aside class="portal-sidebar">
+      <span class="portal-avatar" data-portal-avatar>A</span><h2 data-portal-name>Member</h2><p data-portal-email></p>
+      <span class="membership-badge" data-membership-badge>FREE MEMBER</span>
+      <nav><a class="active" href="#overview">Overview</a><a href="#benefits">Benefits</a><a href="events.html">Events</a><a class="nav-subitem" href="#my-events" data-my-events-nav>My events</a><a href="#account">Account</a></nav>
+      <a class="admin-entry" data-admin-entry href="admin.html" hidden>Open admin console →</a>
+    </aside>
+    <section class="portal-content">
+      <div class="portal-welcome" id="overview"><p data-welcome-kicker>MEMBER HOME</p><h1 data-welcome-title>Good to see you.</h1><p data-welcome-copy>Your account is ready. Explore community events and build your global founder network.</p></div>
+      <div class="membership-grid" id="benefits">
+        <article class="membership-card free-card"><span>FREE</span><h3 data-free-title>Community Member</h3><ul><li data-free-1>Public event access</li><li data-free-2>AI daily brief</li><li data-free-3>ShouldWeTV channel</li></ul></article>
+        <article class="membership-card paid-card" data-paid-card><span>GLOBAL+</span><h3 data-paid-title>Paid Membership</h3><ul><li data-paid-1>Priority event registration</li><li data-paid-2>Private founder sessions</li><li data-paid-3>Member-only resources</li><li data-paid-4>Partner introductions</li></ul><button class="btn dark" data-upgrade>Request upgrade →</button></article>
+      </div>
+      <section class="member-learning" id="my-events">
+        <header><div><p data-learning-kicker>MY LEARNING</p><h2 data-learning-title>Events, insights<br>and materials.</h2></div><span data-learning-count>0 JOINED</span></header>
+        <div class="learning-tabs" role="tablist"><button class="active" data-learning-tab="joined">Joined events</button><button data-learning-tab="summaries">Event summaries</button><button data-learning-tab="decks">PPT decks</button></div>
+        <div class="learning-panel" data-learning-panel="joined"></div>
+        <div class="learning-panel" data-learning-panel="summaries" hidden></div>
+        <div class="learning-panel" data-learning-panel="decks" hidden></div>
+      </section>
+      <section class="portal-account" id="account"><h2 data-account-heading>Account</h2><div><span data-account-plan>Current plan</span><b data-current-plan>Free</b></div><button class="btn ghost" data-portal-logout>Log out</button></section>
+    </section>
+  </main>
+  <script src="auth-config.js"></script><script src="events-config.js"></script><script src="notification-config.js"></script><script src="dashboard.js"></script><script src="member-resources.js"></script><script src="membership-review.js"></script>
+</body>
+</html>
