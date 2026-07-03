@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#171717">
+  <meta name="description" content="AI Startup Global daily AI radar and GitHub Top 10.">
+  <title>AI Radar — AI Startup Global</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="ai-radar.css">
+</head>
+<body class="radar-page">
+  <header class="radar-nav"><a class="brand" href="index.html"><span class="mark" aria-hidden="true"></span><b>AI Startup<br>Global</b></a><div><button class="lang-toggle" type="button" data-radar-lang>中文</button><a class="btn white compact" href="index.html" data-copy="home">← Home</a></div></header>
+  <main>
+    <section class="radar-intro"><p class="eyebrow"><i></i><span data-copy="eyebrow">DAILY AI INTELLIGENCE</span></p><h1 data-copy="title">What matters<br><em>today.</em></h1><div><p data-copy="intro">A living dashboard for open-source AI signals. Updated every day from GitHub Trending and the GitHub API.</p><span data-radar-date>UPDATING</span></div></section>
+    <section class="radar-console" data-radar-console>
+      <div class="radar-console-bar"><span class="radar-dots">● ● ●</span><b data-copy="consoleTitle">AI RADAR / DAILY SIGNAL</b><span><i></i><span data-copy="live">LIVE DATA</span></span></div>
+      <div class="radar-console-body">
+        <aside><small data-copy="channels">CHANNELS</small><a class="active" href="#github-top"><span>⌁</span><b data-copy="github">GitHub Top 10</b></a><a href="#next-signals"><span>◫</span><b data-copy="news">AI News</b><em data-copy="soon">SOON</em></a><a href="#next-signals"><span>◇</span><b data-copy="papers">Papers</b><em data-copy="soon">SOON</em></a><a href="#next-signals"><span>◎</span><b data-copy="tools">Tools</b><em data-copy="soon">SOON</em></a><div><small data-copy="refresh">DAILY REFRESH</small><strong>10</strong><span data-copy="projects">AI PROJECTS</span></div></aside>
+        <div class="radar-feature" data-radar-feature aria-live="polite"></div>
+      </div>
+      <div class="radar-ticker"><span data-copy="ticker">TODAY’S OPEN-SOURCE SIGNALS</span><div><div data-radar-ticker-track></div></div></div>
+    </section>
+    <section class="radar-ranking" id="github-top">
+      <header><div><p>01 / GITHUB DAILY</p><h2 data-copy="rankingTitle">Today’s AI<br>Top 10.</h2></div><div><p data-copy="rankingCopy">The first five receive the full signal treatment. The next five stay compact for fast scanning.</p><span data-radar-source>GITHUB TRENDING</span></div></header>
+      <div class="top-five" data-top-five></div>
+      <div class="next-five-head"><span>06—10</span><h3 data-copy="moreSignals">Five more signals</h3><p data-copy="moreCopy">Smaller cards, same direct path to the source.</p></div>
+      <div class="next-five" data-next-five></div>
+    </section>
+    <section class="radar-next" id="next-signals"><div><span>02—04 / ROADMAP</span><h2 data-copy="nextTitle">One radar.<br>More signals next.</h2></div><div class="radar-next-grid"><article><b>AI NEWS</b><p data-copy="newsDesc">Product releases, funding and company moves.</p><span data-copy="soon">SOON</span></article><article><b>PAPERS</b><p data-copy="papersDesc">Research worth understanding, without the noise.</p><span data-copy="soon">SOON</span></article><article><b>TOOLS</b><p data-copy="toolsDesc">Useful AI products with clear founder applications.</p><span data-copy="soon">SOON</span></article></div></section>
+    <section class="radar-method"><span data-copy="methodLabel">HOW IT UPDATES</span><p data-copy="method">Every day, an automated GitHub Action reads GitHub Daily Trending, filters for AI-related repositories, enriches each result with public GitHub API data, and publishes the new Top 10.</p><a href="https://github.com/trending?since=daily" target="_blank" rel="noreferrer" data-copy="sourceLink">View GitHub Trending ↗</a></section>
+  </main>
+  <footer class="radar-footer"><a href="index.html">AI Startup Global</a><p data-copy="footer">Signals for people building what comes next.</p><span>© <i data-radar-year></i></span></footer>
+  <script src="ai-radar.js"></script>
+</body>
+</html>
