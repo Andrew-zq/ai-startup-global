@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 concurrency:
   group: ai-radar-daily
@@ -26,9 +27,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/update-github-trending.mjs
       - name: Commit updated radar data
+        id: commit
         run: |
           if git diff --quiet -- data/github-trending.json; then
             echo "No data changes"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "github-actions[bot]"
@@ -36,3 +39,11 @@ jobs:
           git add data/github-trending.json
           git commit -m "update daily AI radar"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Publish refreshed data to GitHub Pages
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sleep 20
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
