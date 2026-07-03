@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-03T06:50:02.434Z",
+  "generatedAt": "2026-07-03T06:59:06.740Z",
   "sourceUrl": "https://github.com/trending?since=daily",
   "method": "GitHub daily trending filtered for AI; GitHub Search fills remaining positions.",
   "projects": [
@@ -34,12 +34,12 @@
         "security",
         "security-automation"
       ],
-      "stars": 32899,
-      "forks": 3429,
+      "stars": 32922,
+      "forks": 3430,
       "openIssues": 133,
       "license": "Apache-2.0",
       "starsToday": 2137,
-      "updatedAt": "2026-07-03T06:49:49Z",
+      "updatedAt": "2026-07-03T06:58:53Z",
       "avatarUrl": "https://avatars.githubusercontent.com/u/187630752?v=4",
       "readmeExcerpt": "Strix The open source AI pentesting tool. Autonomous AI hackers that find and fix your app’s vulnerabilities. [!TIP] New! Strix integrates seamlessly with GitHub Actions and CI/CD pipelines. Automatically scan for vulnerabilities on every pull request and block insecure code before it reaches production Get started with no setup required. Strix Overview Strix are autonomous AI penetration testing agents that act just like real hackers they run your code dynamically, find vulnerabilities, and validate them through actual proofs of concept. Built for developers and security teams who need fast, accurate security testing without the overhead of manual pentesting or the false positives of static analysis tools. Key Capabilities: Full pentesting toolkit reconnaissance, exploitation, and validation out of the box Multi agent orchestration teams of AI pentesters that collaborate and scale Real ",
       "source": "GitHub Trending"
@@ -65,12 +65,12 @@
         "skill",
         "tokens"
       ],
-      "stars": 81651,
-      "forks": 4561,
+      "stars": 81687,
+      "forks": 4562,
       "openIssues": 366,
       "license": "MIT",
       "starsToday": 926,
-      "updatedAt": "2026-07-03T06:49:30Z",
+      "updatedAt": "2026-07-03T06:59:02Z",
       "avatarUrl": "https://avatars.githubusercontent.com/u/104168679?v=4",
       "readmeExcerpt": "caveman why use many token when few do trick Before/After • Install • What You Get • Benchmarks • Full install guide A Claude Code skill/plugin (also Codex, Gemini, Cursor, Windsurf, Cline, Copilot, 30+ more) that makes agent talk like caveman — cuts 75% of output tokens , keeps full technical accuracy. Brain still big. Mouth small. Before / After 🗣️ Normal Claude (69 tokens) \"The reason your React component is re rendering is likely because you're creating a new object reference on each render cycle. When you pass an inline object as a prop, React's shallow comparison sees it as a different object every time, which triggers a re render. I'd recommend using useMemo to memoize the object.\" Caveman Claude (19 tokens) \"New object ref each render. Inline object prop = new ref = re render. Wrap in useMemo .\" 🗣️ Normal Claude \"Sure! I'd be happy to help you with that. The issue you're experi",
       "source": "GitHub Trending"
@@ -85,12 +85,12 @@
       "homepage": "",
       "language": "Shell",
       "topics": [],
-      "stars": 125852,
-      "forks": 20422,
+      "stars": 125865,
+      "forks": 20425,
       "openIssues": 98,
       "license": "MIT",
       "starsToday": 3032,
-      "updatedAt": "2026-07-03T06:49:42Z",
+      "updatedAt": "2026-07-03T06:58:49Z",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1972242?v=4",
       "readmeExcerpt": "🎭 The Agency: AI Specialists Ready to Transform Your Workflow A complete AI agency at your fingertips From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables. ### 🆕 There's an app now Agency Agents is a native app for macOS, Linux & Windows that browses the entire roster and installs it into Claude Code, Cursor, Codex, Gemini, Osaurus, and more — with a click. No clone, no scripts, and it auto updates. → Download the latest release · agencyagents.app 🚀 What Is This? Born from a Reddit thread and months of iteration, The Agency is a growing collection of meticulously crafted AI agent personalities. Each agent is: 🎯 Specialized : Deep expertise in their domain (not generic prompt templates) 🧠 Personality Driven : Unique voice, communication style, and approach \ud83d",
       "source": "GitHub Trending"
@@ -122,12 +122,12 @@
         "open-source",
         "resume"
       ],
-      "stars": 58107,
+      "stars": 58110,
       "forks": 11414,
       "openIssues": 121,
       "license": "MIT",
       "starsToday": 372,
-      "updatedAt": "2026-07-03T06:49:31Z",
+      "updatedAt": "2026-07-03T06:56:32Z",
       "avatarUrl": "https://avatars.githubusercontent.com/u/256850418?v=4",
       "readmeExcerpt": "Career Ops English Deutsch Español Français Português (Brasil) 한국어 日本語 简体中文 繁體中文 Українська Русский Polski Dansk العربية I spent months applying to jobs the hard way. So I engineered the system I wish I had. Companies use AI to filter candidates. I just gave candidates AI to choose companies. Now it's open source. FEATURED IN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 740+ job listings evaluated · 100+ personalized CVs · 1 dream role landed Also runs on any agent skill standard CLI. See Supported CLIs . What Is This Career Ops (career ops.org, also known as careerops ) turns any AI coding CLI into a full job search command center. Instead of manually tracking applications in a spreadsheet, you get an AI powered pipeline that: Evaluates offers with a structured A F scoring system (10 weighted dimensions) Generates tailored PDFs ATS optimized CVs customized per job description Scans portals automatica",
       "source": "GitHub Trending"
@@ -151,12 +151,12 @@
         "subagent-driven-development",
         "superpowers"
       ],
-      "stars": 244781,
-      "forks": 21701,
+      "stars": 244789,
+      "forks": 21703,
       "openIssues": 312,
       "license": "MIT",
       "starsToday": 897,
-      "updatedAt": "2026-07-03T06:49:54Z",
+      "updatedAt": "2026-07-03T06:57:08Z",
       "avatarUrl": "https://avatars.githubusercontent.com/u/45416?v=4",
       "readmeExcerpt": "Superpowers Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them. We're Hiring! We're hiring someone to help out full time with Superpowers community and code work. You can read about the job at https://primeradiant.com/jobs/superpowers community engineer/ If this sounds like someone you know, definitely send them our way. Quickstart Give your agent Superpowers: Claude Code, Antigravity, Codex App, Codex CLI, Cursor, Factory Droid, GitHub Copilot CLI, Kimi Code, OpenCode, Pi. How it works It starts from the moment you fire up your coding agent. As soon as it sees that you're building something, it doesn't just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do. Once it's teased a spec out of the convers",
       "source": "GitHub Trending"
@@ -180,12 +180,12 @@
         "mcp-server",
         "puppeteer"
       ],
-      "stars": 45200,
+      "stars": 45204,
       "forks": 2939,
       "openIssues": 89,
       "license": "Apache-2.0",
       "starsToday": 104,
-      "updatedAt": "2026-07-03T06:48:23Z",
+      "updatedAt": "2026-07-03T06:58:44Z",
       "avatarUrl": "https://avatars.githubusercontent.com/u/11260967?v=4",
       "readmeExcerpt": "Chrome DevTools for agents Chrome DevTools for agents ( chrome devtools mcp ) lets your coding agent (such as Antigravity, Claude, Cursor or Copilot) control and inspect a live Chrome browser. It acts as a Model Context Protocol (MCP) server, giving your AI coding assistant access to the full power of Chrome DevTools for reliable automation, in depth debugging, and performance analysis. A CLI is also provided for use without MCP. Tool reference Changelog Contributing Troubleshooting Design Principles Key features Get performance insights : Uses Chrome DevTools to record traces and extract actionable performance insights. Advanced browser debugging : Analyze network requests, take screenshots and check browser console messages (with source mapped stack traces). Reliable automation . Uses puppeteer to automate actions in Chrome and automatically wait for action results. Disclaimers chrome ",
       "source": "GitHub Trending"
@@ -200,12 +200,12 @@
       "homepage": "",
       "language": "Python",
       "topics": [],
-      "stars": 13984,
-      "forks": 1699,
+      "stars": 13993,
+      "forks": 1700,
       "openIssues": 51,
       "license": "MIT",
       "starsToday": 554,
-      "updatedAt": "2026-07-03T06:48:37Z",
+      "updatedAt": "2026-07-03T06:57:49Z",
       "avatarUrl": "https://avatars.githubusercontent.com/u/192012301?v=4",
       "readmeExcerpt": "video use Introducing video use — edit videos with Claude Code. 100% open source. Drop raw footage in a folder, chat with Claude Code, get final.mp4 back. Works for any content — talking heads, montages, tutorials, travel, interviews — without presets or menus. Try video use in Browser Use Cloud. What it does Cuts out filler words ( umm , uh , false starts) and dead space between takes Auto color grades every segment (warm cinematic, neutral punch, or any custom ffmpeg chain) 30ms audio fades at every cut so you never hear a pop Burns subtitles in your style — 2 word UPPERCASE chunks by default, fully customizable Generates animation overlays via HyperFrames, Remotion, Manim, or PIL — spawned in parallel sub agents, one per animation Self evaluates the rendered output at every cut boundary before showing you anything Persists session memory in project.md so next week's session picks up w",
       "source": "GitHub Trending"
@@ -229,12 +229,12 @@
         "mcp",
         "productivity"
       ],
-      "stars": 225348,
+      "stars": 225355,
       "forks": 34477,
       "openIssues": 88,
       "license": "MIT",
       "starsToday": 486,
-      "updatedAt": "2026-07-03T06:49:26Z",
+      "updatedAt": "2026-07-03T06:58:24Z",
       "avatarUrl": "https://avatars.githubusercontent.com/u/124439313?v=4",
       "readmeExcerpt": "Language: English Português (Brasil) 简体中文 繁體中文 日本語 한국어 Türkçe Русский Tiếng Việt ไทย Deutsch Español [!WARNING] Official sources only. Install ECC only from verified channels: the GitHub repository github.com/affaan m/ECC, the npm packages ecc universal and ecc agentshield , the GitHub App, the plugin slug ecc@ecc , and the project website ecc.tools. Third party re uploads and unofficial mirrors are not maintained or reviewed by the project and may contain malware. 211.9K+ stars 32.5K+ forks 230+ contributors 12+ language ecosystems Cross harness agent workflows Language / 语言 / 語言 / Dil / Язык / Ngôn ngữ / Idioma English Português (Brasil) 简体中文 繁體中文 日本語 한국어 Türkçe Русский Tiếng Việt ไทย Deutsch Español The harness native operator system for agentic work. Built from real world multi harness engineering workflows. Not just configs. A complete system: skills, instincts, memory optimization,",
       "source": "GitHub Trending"
@@ -260,12 +260,12 @@
         "quantitative-finance",
         "trading"
       ],
-      "stars": 17491,
+      "stars": 17496,
       "forks": 2899,
       "openIssues": 17,
       "license": "MIT",
       "starsToday": 939,
-      "updatedAt": "2026-07-03T06:43:53Z",
+      "updatedAt": "2026-07-03T06:57:31Z",
       "avatarUrl": "https://avatars.githubusercontent.com/u/118165258?v=4",
       "readmeExcerpt": "English 中文 日本語 한국어 العربية Vibe Trading: Your Personal Trading Agent One Command to Empower Your Agent with Comprehensive Trading Capabilities Website &nbsp;&middot;&nbsp; Docs &nbsp;&middot;&nbsp; News &nbsp;&middot;&nbsp; Features &nbsp;&middot;&nbsp; Shadow Account &nbsp;&middot;&nbsp; Demo &nbsp;&middot;&nbsp; Quick Start &nbsp;&middot;&nbsp; Examples &nbsp;&middot;&nbsp; API / MCP &nbsp;&middot;&nbsp; Roadmap &nbsp;&middot;&nbsp; Contributing 📰 News 2026 07 02 ⚡ Factor acceleration + safer runtime boundaries : hot rolling factor operators now use bottleneck /NumPy fast paths, alpha bench parallelism avoids repeated large panel worker payloads, and base equity math has regression coverage (#376, closes #339, original work from #342 by @shadowinlife). Upload and Shadow report routes moved out of the monolithic api server.py as the first narrow API modularization slice while #331 stay",
       "source": "GitHub Trending"
@@ -282,12 +282,12 @@
       "topics": [
         "agent-skills"
       ],
-      "stars": 21719,
-      "forks": 1378,
+      "stars": 21721,
+      "forks": 1379,
       "openIssues": 47,
       "license": "Apache-2.0",
       "starsToday": 86,
-      "updatedAt": "2026-07-03T06:48:32Z",
+      "updatedAt": "2026-07-03T06:58:10Z",
       "avatarUrl": "https://avatars.githubusercontent.com/u/249824077?v=4",
       "readmeExcerpt": "Agent Skills A standardized way to give AI agents new capabilities and expertise. What are Agent Skills? Agent Skills are a lightweight, open format for extending AI agent capabilities with specialized knowledge and workflows. At its core, a skill is a folder containing a SKILL.md file. This file includes metadata ( name and description , at minimum) and instructions that tell an agent how to perform a specific task. Skills can also bundle scripts, reference materials, templates, and other resources. Why Agent Skills? Agents are increasingly capable, but often don't have the context they need to do real work reliably. Skills solve this by packaging procedural knowledge and company , team , and user specific context into portable, version controlled folders that agents load on demand. This gives agents: Domain expertise : Capture specialized knowledge — from legal review processes to data",
       "source": "GitHub Trending"
