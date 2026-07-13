@@ -1,9 +1,18 @@
 const resourceCopy={
-  en:{events:'Events',nav:'My events',kicker:'MY LEARNING',title:'Events, insights<br>and materials.',joined:'Joined events',summaries:'Event summaries',decks:'PPT decks',count:'JOINED',empty:'You have not joined any member events yet.',explore:'Explore member events →',upcoming:'UPCOMING',completed:'COMPLETED',summaryLabel:'EVENT SUMMARY',deckLabel:'LEARNING DECK',summaryPending:'The event summary will be published after the session.',deckPending:'PPT materials will be available after the event.',openDeck:'Open PPT →',registered:'Registered'},
-  zh:{events:'活动',nav:'我的活动',kicker:'我的学习',title:'活动、总结<br>与学习资料。',joined:'已加入的活动',summaries:'活动总结',decks:'PPT 资料',count:'已加入',empty:'你还没有加入任何会员活动。',explore:'浏览会员活动 →',upcoming:'即将开始',completed:'已结束',summaryLabel:'活动总结',deckLabel:'学习资料',summaryPending:'活动结束后将在这里发布专业总结。',deckPending:'活动结束并整理完成后开放 PPT 资料。',openDeck:'打开 PPT →',registered:'已报名'}
+  en:{events:'Events',nav:'My events',kicker:'MY LEARNING',title:'Events, insights<br>and materials.',joined:'Joined events',summaries:'Event summaries',decks:'Materials',count:'JOINED',empty:'You have not joined any member events yet.',explore:'Explore member events →',upcoming:'UPCOMING',completed:'COMPLETED',summaryLabel:'EVENT SUMMARY',deckLabel:'MEETING MATERIAL',summaryPending:'The event summary will be published after the session.',deckPending:'Meeting materials will be available after the event.',openDeck:'Open material →',openEvent:'Open event →',noEventLink:'Event link not available yet.',registered:'Registered'},
+  zh:{events:'活动',nav:'我的活动',kicker:'我的学习',title:'活动、总结<br>与学习资料。',joined:'已加入的活动',summaries:'活动总结',decks:'会议资料',count:'已加入',empty:'你还没有加入任何会员活动。',explore:'浏览会员活动 →',upcoming:'即将开始',completed:'已结束',summaryLabel:'活动总结',deckLabel:'会议资料',summaryPending:'活动结束后将在这里发布专业总结。',deckPending:'活动结束并整理完成后开放会议资料。',openDeck:'打开资料 →',openEvent:'查看活动 →',noEventLink:'活动链接暂未开放。',registered:'已报名'}
 };
 
 let joinedEvents=[];
+
+function materialKindFromUrl(url){
+  const clean=(url||'').split('?')[0].toLowerCase();
+  if(/\.(ppt|pptx)$/.test(clean))return 'PPT';
+  if(/\.pdf$/.test(clean))return 'PDF';
+  if(/\.(doc|docx)$/.test(clean))return 'WORD';
+  if(/\.(md|markdown)$/.test(clean))return 'MD';
+  return 'FILE';
+}
 
 async function loadMemberResources(){
   try{
@@ -59,6 +68,13 @@ function renderLearningPanel(type,events,c,chinese){
       card.querySelector('h3').textContent=title;
       card.querySelector('p').textContent=chinese?(event.descriptionZh||event.description||''):(event.description||'');
       card.querySelector('small').textContent=c.registered+' · '+new Intl.DateTimeFormat(chinese?'zh-CN':'en-CA',{month:'short',day:'2-digit'}).format(new Date(event.registration.registeredAt));
+      const link=document.createElement('a');
+      link.className='btn dark compact learning-action';
+      link.href=event.url||'apply.html#member-events';
+      link.target=event.url&&event.url.startsWith('http')?'_blank':'_self';
+      link.rel='noreferrer';
+      link.textContent=c.openEvent;
+      card.append(link);
     }
     if(type==='summaries'){
       card.innerHTML='<div class="resource-meta"><span></span><time></time></div><h3></h3><p></p>';
@@ -68,7 +84,8 @@ function renderLearningPanel(type,events,c,chinese){
       card.querySelector('p').textContent=(chinese?(event.summaryZh||event.summary):(event.summary||event.summaryZh))||c.summaryPending;
     }
     if(type==='decks'){
-      card.innerHTML='<div class="deck-icon">PPT</div><div><small></small><h3></h3><p></p></div>';
+      card.innerHTML='<div class="deck-icon"></div><div><small></small><h3></h3><p></p></div>';
+      card.querySelector('.deck-icon').textContent=materialKindFromUrl(event.pptUrl);
       card.querySelector('small').textContent=c.deckLabel;
       card.querySelector('h3').textContent=title;
       if(event.pptUrl){
