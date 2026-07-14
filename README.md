@@ -41,7 +41,8 @@ Global+ is wired for Stripe Checkout at CA$29.99 CAD/month with a 30-day trial.
    - Recurring price: `CA$29.99`, monthly
    - Copy the Price ID, for example `price_...`
 2. In Supabase SQL Editor, run:
-   - `supabase/prd-v1.2-migration.sql`
+   - `supabase/global-plus-required-fields.sql`
+   - Optional full PRD migration: `supabase/prd-v1.2-migration.sql`
    - `supabase/stripe-subscriptions.sql`
 3. In Supabase Edge Functions secrets, add:
    - `STRIPE_SECRET_KEY=sk_live_...`
