@@ -24,7 +24,7 @@ function installEditorFields(){
     '<label class="wide"><span>中文活动总结</span><textarea name="summaryZh"></textarea></label>',
     '<fieldset class="wide material-fieldset">',
     '<legend>Optional meeting material</legend>',
-    '<p>Upload a PPT, PDF, Word, or Markdown file to Supabase Storage. You can also paste an existing public file URL.</p>',
+    '<p>Upload a PPT, PDF, Word, or Markdown file to Supabase Storage. Do not put Zoom/meeting links here; use the registration/session URL field above for the session entrance.</p>',
     '<label><span>Upload material / 上传资料</span><input name="materialFile" type="file" accept=".ppt,.pptx,.pdf,.doc,.docx,.md,.markdown,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,text/markdown,text/plain"></label>',
     '<label><span>Material URL / 资料链接</span><input name="pptUrl" type="url" placeholder="Auto-filled after upload, or paste https://..."></label>',
     '<small data-material-status>Optional · max 25MB · bucket: event-materials</small>',
@@ -36,7 +36,18 @@ function installEditorFields(){
 installEditorFields();
 editorForm.elements.url.required=false;
 
+function isMeetingUrl(url){
+  if(!url)return false;
+  try{
+    const host=new URL(url).hostname.toLowerCase();
+    return ['zoom.us','webex.com','meet.google.com','teams.microsoft.com','whereby.com','gotomeeting.com','bluejeans.com'].some(domain=>host===domain||host.endsWith('.'+domain));
+  }catch{
+    return false;
+  }
+}
+
 function mapEvent(row){
+  const materialIsMeeting=isMeetingUrl(row.ppt_url);
   return {
     id:row.id,
     channel:row.channel,
@@ -49,10 +60,10 @@ function mapEvent(row){
     location:row.location,
     locationZh:row.location_zh,
     date:row.starts_at,
-    url:row.registration_url,
+    url:row.registration_url||(materialIsMeeting?row.ppt_url:null),
     summary:row.summary,
     summaryZh:row.summary_zh,
-    pptUrl:row.ppt_url,
+    pptUrl:materialIsMeeting?null:row.ppt_url,
     published:row.published
   };
 }
@@ -295,6 +306,15 @@ editorForm.onsubmit=async event=>{
     const id=form.id||'event-'+Date.now().toString(36);
     const uploadedUrl=await uploadMaterialFile(id,editorForm.elements.materialFile.files?.[0]);
     if(uploadedUrl)editorForm.elements.pptUrl.value=uploadedUrl;
+    let sessionUrl=form.url||'';
+    let materialUrl=editorForm.elements.pptUrl.value||form.pptUrl||'';
+    if(isMeetingUrl(materialUrl)){
+      if(!sessionUrl)sessionUrl=materialUrl;
+      materialUrl='';
+      editorForm.elements.url.value=sessionUrl;
+      editorForm.elements.pptUrl.value='';
+      setMaterialStatus('Zoom/meeting link moved to Registration / session URL. Material link cleared.',true);
+    }
     const row={
       id,
       channel:form.channel,
@@ -307,10 +327,10 @@ editorForm.onsubmit=async event=>{
       location:form.location||null,
       location_zh:form.locationZh||null,
       starts_at:new Date(form.date).toISOString(),
-      registration_url:form.url||null,
+      registration_url:sessionUrl||null,
       summary:form.summary||null,
       summary_zh:form.summaryZh||null,
-      ppt_url:editorForm.elements.pptUrl.value||form.pptUrl||null,
+      ppt_url:materialUrl||null,
       published:true,
       updated_at:new Date().toISOString()
     };

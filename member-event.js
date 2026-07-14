@@ -24,7 +24,13 @@ const memberEventCopy={
     upgrade:'Join Global+ →',
     register:'Register for this event →',
     entrance:'Join session →',
-    entranceClosed:'Session entrance not open',
+    entranceMissing:'Session link not configured',
+    cancel:'Cancel registration',
+    cancelLocked:'Cancellation closed',
+    cancelHint:'You can cancel before the event starts.',
+    cancelLockedHint:'The event has already started, so registration can no longer be cancelled.',
+    cancelConfirm:'Cancel your registration for this event?',
+    cancelError:'Cancellation failed',
     details:'EVENT DETAILS',
     date:'Date',
     location:'Location',
@@ -60,7 +66,13 @@ const memberEventCopy={
     upgrade:'加入 Global+ →',
     register:'报名本场活动 →',
     entrance:'参加入口 →',
-    entranceClosed:'参加入口未开放',
+    entranceMissing:'会议链接未配置',
+    cancel:'退出活动',
+    cancelLocked:'已不可退出',
+    cancelHint:'活动开始前可以自主退出。',
+    cancelLockedHint:'活动已经开始，不能再取消报名。',
+    cancelConfirm:'确定要退出这场活动吗？',
+    cancelError:'退出失败',
     details:'活动信息',
     date:'时间',
     location:'地点',
@@ -94,6 +106,36 @@ function materialKindFromUrl(url){
   return 'FILE';
 }
 
+function isMeetingUrl(url){
+  if(!url)return false;
+  try{
+    const host=new URL(url).hostname.toLowerCase();
+    return [
+      'zoom.us',
+      'webex.com',
+      'meet.google.com',
+      'teams.microsoft.com',
+      'whereby.com',
+      'gotomeeting.com',
+      'bluejeans.com'
+    ].some(domain=>host===domain||host.endsWith('.'+domain));
+  }catch{
+    return false;
+  }
+}
+
+function materialUrl(){
+  return isMeetingUrl(currentEvent?.pptUrl)?null:currentEvent?.pptUrl;
+}
+
+function sessionUrl(){
+  return currentEvent?.url||(isMeetingUrl(currentEvent?.pptUrl)?currentEvent.pptUrl:null);
+}
+
+function canCancelRegistration(){
+  return !!currentEvent?.date&&new Date(currentEvent.date)>new Date();
+}
+
 function formatEventRange(event){
   if(!event?.date)return '—';
   const chinese=memberEventLang==='zh-CN';
@@ -117,23 +159,48 @@ function renderAction(){
   root.textContent='';
   const registered=!!currentRegistration;
   const paid=currentProfile?.membership_level==='paid';
+  const joinUrl=sessionUrl();
 
   if(registered){
-    if(currentEvent?.url){
+    const actionStack=document.createElement('div');
+    actionStack.className='member-action-stack';
+    if(joinUrl){
       const link=document.createElement('a');
       link.className='btn white';
-      link.href=currentEvent.url;
-      link.target=currentEvent.url.startsWith('http')?'_blank':'_self';
+      link.href=joinUrl;
+      link.target=joinUrl.startsWith('http')?'_blank':'_self';
       link.rel='noreferrer';
       link.textContent=copy.entrance;
-      root.append(link);
+      actionStack.append(link);
     }else{
       const button=document.createElement('button');
       button.className='btn ghost';
       button.disabled=true;
-      button.textContent=copy.entranceClosed;
-      root.append(button);
+      button.textContent=copy.entranceMissing;
+      actionStack.append(button);
     }
+    const cancel=document.createElement('button');
+    cancel.className='btn ghost compact member-cancel';
+    cancel.type='button';
+    cancel.disabled=!canCancelRegistration();
+    cancel.textContent=canCancelRegistration()?copy.cancel:copy.cancelLocked;
+    cancel.onclick=async()=>{
+      if(cancel.disabled||!confirm(copy.cancelConfirm))return;
+      try{
+        cancel.disabled=true;
+        await window.AISGData.unregister(currentEvent.id);
+        currentRegistration=null;
+        render();
+      }catch(error){
+        cancel.disabled=false;
+        alert(copy.cancelError+': '+error.message);
+      }
+    };
+    const hint=document.createElement('small');
+    hint.className='member-cancel-hint';
+    hint.textContent=canCancelRegistration()?copy.cancelHint:copy.cancelLockedHint;
+    actionStack.append(cancel,hint);
+    root.append(actionStack);
     setText('[data-pass-status]',copy.registered);
     setText('[data-pass-copy]',copy.registeredCopy);
     return;
@@ -183,16 +250,17 @@ function renderAction(){
 
 function renderMaterial(){
   const copy=c();
+  const url=materialUrl();
   setText('[data-material-label]',copy.materialLabel);
   setText('[data-material-title]',copy.materialTitle);
-  setText('[data-material-kind]',materialKindFromUrl(currentEvent?.pptUrl));
+  setText('[data-material-kind]',materialKindFromUrl(url));
   const root=document.querySelector('[data-material-action]');
   root.textContent='';
-  if(currentEvent?.pptUrl){
+  if(url){
     setText('[data-material-copy]',currentRegistration?copy.registeredCopy:copy.materialPending);
     const link=document.createElement('a');
     link.className='btn dark compact';
-    link.href=currentEvent.pptUrl;
+    link.href=url;
     link.target='_blank';
     link.rel='noreferrer';
     link.textContent=copy.openMaterial;

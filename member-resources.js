@@ -14,6 +14,20 @@ function materialKindFromUrl(url){
   return 'FILE';
 }
 
+function isMeetingUrl(url){
+  if(!url)return false;
+  try{
+    const host=new URL(url).hostname.toLowerCase();
+    return ['zoom.us','webex.com','meet.google.com','teams.microsoft.com','whereby.com','gotomeeting.com','bluejeans.com'].some(domain=>host===domain||host.endsWith('.'+domain));
+  }catch{
+    return false;
+  }
+}
+
+function materialUrl(event){
+  return isMeetingUrl(event?.pptUrl)?null:event?.pptUrl;
+}
+
 async function loadMemberResources(){
   try{
     const rows=await window.AISGData.myRegistrations();
@@ -84,14 +98,15 @@ function renderLearningPanel(type,events,c,chinese){
       card.querySelector('p').textContent=(chinese?(event.summaryZh||event.summary):(event.summary||event.summaryZh))||c.summaryPending;
     }
     if(type==='decks'){
+      const url=materialUrl(event);
       card.innerHTML='<div class="deck-icon"></div><div><small></small><h3></h3><p></p></div>';
-      card.querySelector('.deck-icon').textContent=materialKindFromUrl(event.pptUrl);
+      card.querySelector('.deck-icon').textContent=materialKindFromUrl(url);
       card.querySelector('small').textContent=c.deckLabel;
       card.querySelector('h3').textContent=title;
-      if(event.pptUrl){
+      if(url){
         const link=document.createElement('a');
         link.className='btn dark compact';
-        link.href=event.pptUrl;
+        link.href=url;
         link.target='_blank';
         link.rel='noreferrer';
         link.textContent=c.openDeck;
