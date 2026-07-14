@@ -6,5 +6,6 @@ assets/brand/ai-startup-global-logo.png
 .DS_Store
 Thumbs.db
 supabase/functions/.env
+supabase/.temp/
 .env
 .env.*
