@@ -65,14 +65,11 @@ Deno.serve(async (req) => {
     const supabaseAdmin = adminClient();
     const { data: profile, error: profileError } = await supabaseAdmin
       .from("profiles")
-      .select("id,email,full_name,attended_events,membership_level,trial_used,stripe_customer_id")
+      .select("id,email,full_name,membership_level,trial_used,stripe_customer_id")
       .eq("id", userData.user.id)
       .single();
 
     if (profileError || !profile) return jsonResponse({ error: "Profile not found." }, 404);
-    if ((profile.attended_events || 0) < 1) {
-      return jsonResponse({ error: "Attend one event before starting Global+." }, 403);
-    }
     if (profile.membership_level === "paid") {
       return jsonResponse({ error: "Global+ is already active." }, 409);
     }

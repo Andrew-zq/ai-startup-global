@@ -99,8 +99,8 @@ create policy "paid members register" on public.event_registrations for insert t
 );
 create policy "admins manage registrations" on public.event_registrations for all to authenticated using (public.is_admin()) with check (public.is_admin());
 create policy "users read own requests" on public.membership_requests for select to authenticated using (user_id = auth.uid() or public.is_admin());
-create policy "eligible users request membership" on public.membership_requests for insert to authenticated with check (
-  user_id = auth.uid() and exists(select 1 from public.profiles where id = auth.uid() and attended_events >= 1)
+create policy "signed in users request membership" on public.membership_requests for insert to authenticated with check (
+  user_id = auth.uid()
 );
 create policy "admins review membership" on public.membership_requests for update to authenticated using (public.is_admin()) with check (public.is_admin());
 
