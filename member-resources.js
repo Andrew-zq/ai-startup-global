@@ -70,8 +70,8 @@ function renderLearningPanel(type,events,c,chinese){
       card.querySelector('small').textContent=c.registered+' · '+new Intl.DateTimeFormat(chinese?'zh-CN':'en-CA',{month:'short',day:'2-digit'}).format(new Date(event.registration.registeredAt));
       const link=document.createElement('a');
       link.className='btn dark compact learning-action';
-      link.href=event.url||'apply.html#member-events';
-      link.target=event.url&&event.url.startsWith('http')?'_blank':'_self';
+      link.href='member-event.html?id='+encodeURIComponent(event.id);
+      link.target='_self';
       link.rel='noreferrer';
       link.textContent=c.openEvent;
       card.append(link);
