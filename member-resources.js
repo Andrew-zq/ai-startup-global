@@ -24,8 +24,17 @@ function isMeetingUrl(url){
   }
 }
 
+function isMaterialFileUrl(url){
+  const clean=(url||'').split('?')[0].split('#')[0].toLowerCase();
+  return /\.(ppt|pptx|pdf|doc|docx|md|markdown)$/.test(clean);
+}
+
+function isSessionEntranceUrl(url){
+  return !!url&&(isMeetingUrl(url)||!isMaterialFileUrl(url));
+}
+
 function materialUrl(event){
-  return isMeetingUrl(event?.pptUrl)?null:event?.pptUrl;
+  return isSessionEntranceUrl(event?.pptUrl)?null:event?.pptUrl;
 }
 
 async function loadMemberResources(){

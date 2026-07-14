@@ -24,9 +24,9 @@ function installEditorFields(){
     '<label class="wide"><span>中文活动总结</span><textarea name="summaryZh"></textarea></label>',
     '<fieldset class="wide material-fieldset">',
     '<legend>Optional meeting material</legend>',
-    '<p>Upload a PPT, PDF, Word, or Markdown file to Supabase Storage. Do not put Zoom/meeting links here; use the registration/session URL field above for the session entrance.</p>',
+    '<p>Upload a PPT, PDF, Word, or Markdown file to Supabase Storage. Put Zoom/session entrance links in the field above. If a non-material link is pasted here by mistake, it will be moved automatically.</p>',
     '<label><span>Upload material / 上传资料</span><input name="materialFile" type="file" accept=".ppt,.pptx,.pdf,.doc,.docx,.md,.markdown,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,text/markdown,text/plain"></label>',
-    '<label><span>Material URL / 资料链接</span><input name="pptUrl" type="url" placeholder="Auto-filled after upload, or paste https://..."></label>',
+    '<label><span>Material URL / 课件资料链接</span><input name="pptUrl" type="url" placeholder="PPT, PDF, Word, or Markdown file URL only"></label>',
     '<small data-material-status>Optional · max 25MB · bucket: event-materials</small>',
     '</fieldset>'
   ].join('');
@@ -46,8 +46,29 @@ function isMeetingUrl(url){
   }
 }
 
+function extensionFromUrl(url){
+  if(!url)return '';
+  try{
+    const pathname=new URL(url).pathname.toLowerCase();
+    const last=pathname.split('/').pop()||'';
+    return last.includes('.')?last.split('.').pop():'';
+  }catch{
+    const clean=String(url).split('?')[0].split('#')[0].toLowerCase();
+    const last=clean.split('/').pop()||'';
+    return last.includes('.')?last.split('.').pop():'';
+  }
+}
+
+function isMaterialFileUrl(url){
+  return MATERIAL_EXTENSIONS.includes(extensionFromUrl(url));
+}
+
+function isSessionEntranceUrl(url){
+  return !!url&&(isMeetingUrl(url)||!isMaterialFileUrl(url));
+}
+
 function mapEvent(row){
-  const materialIsMeeting=isMeetingUrl(row.ppt_url);
+  const materialIsSession=isSessionEntranceUrl(row.ppt_url);
   return {
     id:row.id,
     channel:row.channel,
@@ -60,10 +81,10 @@ function mapEvent(row){
     location:row.location,
     locationZh:row.location_zh,
     date:row.starts_at,
-    url:row.registration_url||(materialIsMeeting?row.ppt_url:null),
+    url:row.registration_url||(materialIsSession?row.ppt_url:null),
     summary:row.summary,
     summaryZh:row.summary_zh,
-    pptUrl:materialIsMeeting?null:row.ppt_url,
+    pptUrl:materialIsSession?null:row.ppt_url,
     published:row.published
   };
 }
@@ -308,12 +329,12 @@ editorForm.onsubmit=async event=>{
     if(uploadedUrl)editorForm.elements.pptUrl.value=uploadedUrl;
     let sessionUrl=form.url||'';
     let materialUrl=editorForm.elements.pptUrl.value||form.pptUrl||'';
-    if(isMeetingUrl(materialUrl)){
+    if(isSessionEntranceUrl(materialUrl)){
       if(!sessionUrl)sessionUrl=materialUrl;
       materialUrl='';
       editorForm.elements.url.value=sessionUrl;
       editorForm.elements.pptUrl.value='';
-      setMaterialStatus('Zoom/meeting link moved to Registration / session URL. Material link cleared.',true);
+      setMaterialStatus('This link is not a PPT/PDF/Word/MD material file, so it was moved to the session entrance field.',true);
     }
     const row={
       id,

@@ -124,12 +124,21 @@ function isMeetingUrl(url){
   }
 }
 
+function isMaterialFileUrl(url){
+  const clean=(url||'').split('?')[0].split('#')[0].toLowerCase();
+  return /\.(ppt|pptx|pdf|doc|docx|md|markdown)$/.test(clean);
+}
+
+function isSessionEntranceUrl(url){
+  return !!url&&(isMeetingUrl(url)||!isMaterialFileUrl(url));
+}
+
 function materialUrl(){
-  return isMeetingUrl(currentEvent?.pptUrl)?null:currentEvent?.pptUrl;
+  return isSessionEntranceUrl(currentEvent?.pptUrl)?null:currentEvent?.pptUrl;
 }
 
 function sessionUrl(){
-  return currentEvent?.url||(isMeetingUrl(currentEvent?.pptUrl)?currentEvent.pptUrl:null);
+  return currentEvent?.url||(isSessionEntranceUrl(currentEvent?.pptUrl)?currentEvent.pptUrl:null);
 }
 
 function canCancelRegistration(){

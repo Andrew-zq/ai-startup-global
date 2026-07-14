@@ -1,5 +1,6 @@
 (function(){
   const client=window.supabaseClient;
+  const materialExtensions=['ppt','pptx','pdf','doc','docx','md','markdown'];
 
   function isMeetingUrl(url){
     if(!url)return false;
@@ -11,8 +12,29 @@
     }
   }
 
+  function extensionFromUrl(url){
+    if(!url)return '';
+    try{
+      const pathname=new URL(url).pathname.toLowerCase();
+      const last=pathname.split('/').pop()||'';
+      return last.includes('.')?last.split('.').pop():'';
+    }catch{
+      const clean=String(url).split('?')[0].split('#')[0].toLowerCase();
+      const last=clean.split('/').pop()||'';
+      return last.includes('.')?last.split('.').pop():'';
+    }
+  }
+
+  function isMaterialFileUrl(url){
+    return materialExtensions.includes(extensionFromUrl(url));
+  }
+
+  function isSessionEntranceUrl(url){
+    return !!url&&(isMeetingUrl(url)||!isMaterialFileUrl(url));
+  }
+
   const mapEvent=row=>{
-    const materialIsMeeting=isMeetingUrl(row.ppt_url);
+    const materialIsSession=isSessionEntranceUrl(row.ppt_url);
     return {
       id:row.id,
       channel:row.channel,
@@ -26,10 +48,10 @@
       locationZh:row.location_zh,
       date:row.starts_at,
       endDate:row.ends_at,
-      url:row.registration_url||(materialIsMeeting?row.ppt_url:null),
+      url:row.registration_url||(materialIsSession?row.ppt_url:null),
       summary:row.summary,
       summaryZh:row.summary_zh,
-      pptUrl:materialIsMeeting?null:row.ppt_url,
+      pptUrl:materialIsSession?null:row.ppt_url,
       published:row.published
     };
   };
